@@ -1,0 +1,13 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/scarecrow-dev/komal-sharma', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/scarecrow-dev/komal-sharma']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: ['run', 'deploy', 'komal-sharma', '--image', 'gcr.io/scarecrow-dev/komal-sharma', '--region', 'asia-south1']
+images:
+- gcr.io/scarecrow-dev/komal-sharma
