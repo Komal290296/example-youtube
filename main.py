@@ -1,13 +1,15 @@
-from flask import Flask
 import os
 
-app = Flask(__name__)
+from src.test import ServiceGenerator
+
+service = ServiceGenerator()
+app = service.app
 
 
 @app.route("/")
 def hello_world():
     name = os.environ.get("NAME", "World")
-    return "Hello {}! This is my sixth application".format(name)
+    return "Hello {}! This is my seventh application".format(name)
     
 
 
